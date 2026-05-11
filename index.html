@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreshCart – Premium Grocery Store</title>
+
+    <!-- Your Tailwind CLI output (adjust path if needed) -->
+    <link href="./src/output.css" rel="stylesheet" />
+
+    <!-- ============ CUSTOM CSS (3D, GLASS, ANIMATIONS) ============ -->
+    <style>
+      :root {
+        --green-glow: #22c55e;
+        --gold: #f59e0b;
+        --deep-green: #14532d;
+      }
+
+      * {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: linear-gradient(
+          135deg,
+          #f0fdf4 0%,
+          #dcfce7 25%,
+          #fef9ef 50%,
+          #f0fdf4 75%,
+          #ecfdf5 100%
+        );
+        background-attachment: fixed;
+        overflow-x: hidden;
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      /* ============ 3D PERSPECTIVE ============ */
+      .perspective-container {
+        perspective: 1200px;
+        transform-style: preserve-3d;
+      }
+
+      .card-3d {
+        transition:
+          transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+          box-shadow 0.6s ease;
+        transform-style: preserve-3d;
+        position: relative;
+      }
+      .card-3d:hover {
+        transform: rotateY(8deg) rotateX(-6deg) translateZ(30px);
+        box-shadow:
+          0 30px 60px rgba(0, 0, 0, 0.2),
+          0 15px 30px rgba(34, 197, 94, 0.25),
+          0 0 0 2px rgba(34, 197, 94, 0.3);
+      }
+
+      .card-3d-alt {
+        transition:
+          transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+          box-shadow 0.5s ease;
+        transform-style: preserve-3d;
+      }
+      .card-3d-alt:hover {
+        transform: rotateY(-5deg) rotateX(4deg) translateZ(25px);
+        box-shadow:
+          0 25px 50px rgba(0, 0, 0, 0.18),
+          0 10px 25px rgba(34, 197, 94, 0.2);
+      }
+
+      /* ============ FLOATING ORBS ============ */
+      .floating-orb {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(40px);
+        opacity: 0.5;
+      }
+      .orb-green {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, #4ade80, transparent);
+        animation: floatOrb 7s infinite;
+      }
+      .orb-amber {
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, #fbbf24, transparent);
+        animation: floatOrb 9s 2s infinite;
+      }
+      .orb-emerald {
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(circle, #34d399, transparent);
+        animation: floatOrb 8s 4s infinite;
+      }
+      .orb-rose {
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(circle, #fb7185, transparent);
+        animation: floatOrb 10s 1s infinite;
+      }
+
+      @keyframes floatOrb {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(30px, -25px) scale(1.15);
+        }
+        50% {
+          transform: translate(-15px, -40px) scale(0.9);
+        }
+        75% {
+          transform: translate(-30px, 10px) scale(1.1);
+        }
+      }
+
+      /* ============ GLASSMORPHISM ============ */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+      .glass-card-dark {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 24px;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      /* ============ 3D PRODUCT CARDS ============ */
+      .product-card-inner {
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .product-card-wrapper:hover .product-card-inner {
+        transform: translateZ(20px);
+      }
+      .product-card-wrapper {
+        transition:
+          transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+          box-shadow 0.5s ease;
+        transform-style: preserve-3d;
+        perspective: 800px;
+      }
+      .product-card-wrapper:hover {
+        transform: rotateY(6deg) rotateX(-4deg) scale(1.04);
+        box-shadow:
+          0 35px 55px rgba(0, 0, 0, 0.2),
+          0 0 0 3px rgba(34, 197, 94, 0.35);
+        z-index: 10;
+      }
+
+      /* ============ GLOW BUTTON ============ */
+      .btn-glow {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.35);
+      }
+      .btn-glow:hover {
+        box-shadow:
+          0 8px 35px rgba(34, 197, 94, 0.6),
+          0 0 60px rgba(34, 197, 94, 0.3);
+        transform: translateY(-3px);
+      }
+      .btn-glow::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transform: rotate(45deg);
+        animation: shimmer 2.5s infinite;
+      }
+
+      /* ============ SUCCESS CONFETTI ============ */
+      .confetti-piece {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        animation: confettiFall 3.5s ease-out forwards;
+        opacity: 0;
+      }
+      .confetti-piece:nth-child(1) {
+        left: 5%;
+        background: #22c55e;
+        animation-delay: 0s;
+        width: 14px;
+        height: 14px;
+      }
+      .confetti-piece:nth-child(2) {
+        left: 15%;
+        background: #f59e0b;
+        animation-delay: 0.2s;
+        width: 10px;
+        height: 16px;
+        border-radius: 50%;
+      }
+      .confetti-piece:nth-child(3) {
+        left: 25%;
+        background: #ef4444;
+        animation-delay: 0.4s;
+        width: 16px;
+        height: 10px;
+      }
+      .confetti-piece:nth-child(4) {
+        left: 35%;
+        background: #3b82f6;
+        animation-delay: 0.15s;
+        width: 11px;
+        height: 13px;
+        border-radius: 50%;
+      }
+      .confetti-piece:nth-child(5) {
+        left: 45%;
+        background: #a855f7;
+        animation-delay: 0.55s;
+        width: 15px;
+        height: 15px;
+      }
+      .confetti-piece:nth-child(6) {
+        left: 55%;
+        background: #ec4899;
+        animation-delay: 0.3s;
+        width: 9px;
+        height: 17px;
+        border-radius: 2px;
+      }
+      .confetti-piece:nth-child(7) {
+        left: 65%;
+        background: #14b8a6;
+        animation-delay: 0.6s;
+        width: 13px;
+        height: 11px;
+        border-radius: 50%;
+      }
+      .confetti-piece:nth-child(8) {
+        left: 75%;
+        background: #f97316;
+        animation-delay: 0.1s;
+        width: 17px;
+        height: 9px;
+      }
+      .confetti-piece:nth-child(9) {
+        left: 85%;
+        background: #6366f1;
+        animation-delay: 0.45s;
+        width: 10px;
+        height: 14px;
+        border-radius: 50%;
+      }
+      .confetti-piece:nth-child(10) {
+        left: 92%;
+        background: #eab308;
+        animation-delay: 0.35s;
+        width: 14px;
+        height: 12px;
+      }
+      .confetti-piece:nth-child(11) {
+        left: 10%;
+        background: #22c55e;
+        animation-delay: 0.7s;
+        width: 12px;
+        height: 15px;
+        border-radius: 50%;
+      }
+      .confetti-piece:nth-child(12) {
+        left: 50%;
+        background: #f59e0b;
+        animation-delay: 0.5s;
+        width: 16px;
+        height: 8px;
+      }
+
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-120px) rotate(0deg) scale(1);
+          opacity: 1;
+        }
+        30% {
+          transform: translateY(80px) rotate(180deg) scale(1.3);
+          opacity: 1;
+        }
+        70% {
+          transform: translateY(300px) rotate(400deg) scale(0.7);
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(550px) rotate(720deg) scale(0.2);
+          opacity: 0;
+        }
+      }
+
+      /* ============ OTHER KEYFRAMES ============ */
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+      @keyframes rotate3D {
+        0% {
+          transform: perspective(600px) rotateY(0deg) rotateX(5deg);
+        }
+        25% {
+          transform: perspective(600px) rotateY(10deg) rotateX(-5deg);
+        }
+        50% {
+          transform: perspective(600px) rotateY(0deg) rotateX(5deg);
+        }
+        75% {
+          transform: perspective(600px) rotateY(-10deg) rotateX(-5deg);
+        }
+        100% {
+          transform: perspective(600px) rotateY(0deg) rotateX(5deg);
+        }
+      }
+      @keyframes bounceGentle {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 0 40px rgba(34, 197, 94, 0.8),
+            0 0 60px rgba(34, 197, 94, 0.3);
+        }
+      }
+      @keyframes scaleIn {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes bounceDown {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(12px);
+        }
+      }
+
+      /* ============ MISC ============ */
+      .section-divider {
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #22c55e 20%,
+          #4ade80 50%,
+          #22c55e 80%,
+          transparent
+        );
+        border-radius: 2px;
+        opacity: 0.6;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #16a34a, #22c55e, #4ade80);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .stars {
+        color: #f59e0b;
+      }
+      .input-3d {
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
+      }
+      .input-3d:focus {
+        transform: translateZ(8px);
+        box-shadow:
+          0 8px 25px rgba(34, 197, 94, 0.3),
+          0 0 0 3px rgba(34, 197, 94, 0.2);
+        outline: none;
+      }
+      .sphere-3d {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 30%,
+          #fff 5%,
+          #4ade80 30%,
+          #16a34a 60%,
+          #14532d 100%
+        );
+        box-shadow:
+          inset -8px -8px 20px rgba(0, 0, 0, 0.3),
+          inset 5px 5px 15px rgba(255, 255, 255, 0.4),
+          0 15px 35px rgba(34, 197, 94, 0.4),
+          0 0 50px rgba(34, 197, 94, 0.25);
+        animation: rotate3D 8s infinite;
+        transform-style: preserve-3d;
+      }
+      .ribbon-badge {
+        position: relative;
+        overflow: visible;
+      }
+      .ribbon-badge::before {
+        content: "BEST SELLER";
+        position: absolute;
+        top: 12px;
+        right: -35px;
+        background: #f59e0b;
+        color: #1a1a1a;
+        font-size: 0.7rem;
+        font-weight: 800;
+        padding: 4px 35px;
+        transform: rotate(45deg);
+        letter-spacing: 1px;
+        box-shadow: 0 3px 10px rgba(245, 158, 11, 0.5);
+        z-index: 5;
+      }
+      .scroll-indicator {
+        animation: bounceDown 2s infinite;
+      }
+      .hover-lift {
+        transition:
+          transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+          box-shadow 0.4s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+      }
+      /* for future JS interaction */
+      [data-product-id] {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen relative">
+    <!-- ==================== FLOATING ORB BACKGROUND ==================== -->
+    <div class="floating-orb orb-green" style="top: 5%; left: 5%"></div>
+    <div class="floating-orb orb-amber" style="top: 20%; right: 8%"></div>
+    <div class="floating-orb orb-emerald" style="top: 45%; left: 3%"></div>
+    <div class="floating-orb orb-rose" style="top: 60%; right: 5%"></div>
+    <div class="floating-orb orb-green" style="top: 75%; left: 10%"></div>
+    <div class="floating-orb orb-amber" style="top: 85%; right: 10%"></div>
+
+    <!-- ==================== STICKY NAVIGATION ==================== -->
+    <nav
+      id="navBar"
+      class="sticky top-0 z-50 glass-card-dark mx-4 mt-3 px-6 py-3 flex flex-wrap items-center justify-between gap-4"
+      style="border-radius: 40px"
+    >
+      <div class="flex items-center gap-2 z-10">
+        <div
+          class="sphere-3d"
+          style="width: 42px; height: 42px; animation-duration: 6s"
+        ></div>
+        <span class="text-2xl font-extrabold gradient-text tracking-tight"
+          >FreshCart</span
+        >
+      </div>
+      <div class="flex flex-wrap gap-3 text-sm font-semibold z-10">
+        <a
+          id="navLoginBtn"
+          href="#login-section"
+          class="px-4 py-2 rounded-full bg-white/60 hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-sm"
+          >🔐 Login</a
+        >
+        <a
+          id="navShopBtn"
+          href="#login-section"
+          class="px-4 py-2 rounded-full bg-white/60 hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-sm"
+          >🛒 Shop</a
+        >
+        <a
+          id="navCartBtn"
+          href="#login-section"
+          class="px-4 py-2 rounded-full bg-white/60 hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-sm"
+          >🛍️ Cart</a
+        >
+        <a
+          id="navCheckoutBtn"
+          href="#login-section"
+          class="px-4 py-2 rounded-full bg-white/60 hover:bg-brand-500 hover:text-white transition-all duration-300 shadow-sm"
+          >💳 Checkout</a
+        >
+      </div>
+    </nav>
+
+    <!-- ==================== HERO BANNER ==================== -->
+    <section
+      id="heroBenner"
+      class="relative z-10 mx-4 mt-6 perspective-container"
+      style="min-height: 280px"
+    >
+      <div
+        class="glass-card-dark p-8 md:p-12 text-center relative overflow-hidden card-3d"
+        style="border-radius: 30px"
+      >
+        <div
+          class="absolute top-4 left-8 text-5xl animate-float"
+          style="animation-duration: 3.5s"
+        >
+          🍎
+        </div>
+        <div
+          class="absolute top-10 right-10 text-4xl animate-float-slow"
+          style="animation-duration: 5s"
+        >
+          🥑
+        </div>
+        <div
+          class="absolute bottom-6 left-16 text-4xl animate-float-delayed"
+          style="animation-duration: 4.5s"
+        >
+          🍞
+        </div>
+        <div
+          class="absolute bottom-10 right-16 text-5xl animate-float"
+          style="animation-duration: 3.8s"
+        >
+          🧀
+        </div>
+        <div class="absolute top-1/2 left-4 text-3xl animate-bounce-gentle">
+          🥦
+        </div>
+        <div
+          class="absolute top-1/3 right-6 text-3xl animate-bounce-gentle"
+          style="animation-delay: 0.5s"
+        >
+          🍅
+        </div>
+        <h1
+          class="text-4xl md:text-6xl font-black gradient-text mb-3 relative z-10"
+        >
+          Fresh Groceries Delivered 🚀
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-700 mb-4 max-w-2xl mx-auto relative z-10 font-medium"
+        >
+          Farm-fresh produce, dairy, and pantry essentials — handpicked with
+          love.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 relative z-10">
+          <a
+            href="#shop-section"
+            class="btn-glow inline-block px-8 py-3 bg-brand-500 text-white font-bold rounded-full text-lg shadow-xl"
+            >🛍️ Start Shopping</a
+          >
+          <a
+            href="#login-section"
+            class="inline-block px-8 py-3 bg-white/70 backdrop-blur-sm text-brand-700 font-bold rounded-full text-lg shadow-lg border border-brand-300 hover:bg-brand-50 transition-all"
+            >🔐 Sign In</a
+          >
+        </div>
+        <div
+          class="absolute bottom-3 left-1/2 -translate-x-1/2 scroll-indicator text-2xl z-10 opacity-70"
+        >
+          ⬇️
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== AUTH SECTION (LOGIN / SIGNUP) ==================== -->
+    <section id="login-section" class="relative z-10 mx-4 mt-16 scroll-mt-28">
+      <div class="text-center mb-6">
+        <span class="text-4xl inline-block animate-bounce-gentle">🔐</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">
+          Welcome!
+        </h2>
+        <p class="text-gray-600 mt-1">Log in or create an account</p>
+      </div>
+
+      <div class="max-w-md mx-auto space-y-6">
+        <!-- ========== LOGIN CARD (hidden) ========== -->
+        <div
+          id="login-card"
+          class="glass-card p-8 card-3d-alt hover-lift hidden"
+          style="border-radius: 28px"
+        >
+          <form id="login-form" class="space-y-5">
+            <h3 class="text-xl font-bold text-gray-800">🔑 Sign In</h3>
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="Email"
+              class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+            />
+            <input
+              id="loginPwd"
+              type="password"
+              placeholder="Password"
+              class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+            />
+            <button
+              id="loginBtn"
+              type="submit"
+              class="btn-glow w-full py-3 bg-brand-500 text-white font-bold rounded-xl text-lg shadow-xl"
+            >
+              🚪 Login
+            </button>
+          </form>
+          <p
+            id="signupOpenLink"
+            class="text-center text-sm text-gray-500 hidden"
+          >
+            <span id="auth-toggle-text">Don't have an account?</span>
+            <a
+              href="#"
+              id="auth-toggle-link"
+              class="text-brand-600 font-bold hover:underline ml-1"
+              >Sign up</a
+            >
+          </p>
+        </div>
+
+        <!-- ========== SIGNUP CARD (visible) ========== -->
+        <div
+          id="signup-card"
+          class="glass-card p-8 card-3d-alt hover-lift"
+          style="border-radius: 28px"
+        >
+          <form id="signup-form" class="space-y-5">
+            <h3 class="text-xl font-bold text-gray-800">✨ Create Account</h3>
+            <input
+              id="signup-form-Name"
+              type="text"
+              placeholder="Full Name"
+              class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+            />
+            <input
+              id="signup-form-Email"
+              type="email"
+              placeholder="Email"
+              class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+            />
+            <input
+              id="signup-form-Pwd"
+              type="password"
+              placeholder="Password"
+              class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+            />
+            <button
+              id="signupPageBtn"
+              type="submit"
+              class="btn-glow w-full py-3 bg-brand-500 text-white font-bold rounded-xl text-lg shadow-xl"
+            >
+              ✨ Sign Up
+            </button>
+          </form>
+
+          <!-- Styled info / error message -->
+          <p
+            id="pUnderSignupUp"
+            class="hidden text-center text-sm text-gray-600 mt-4 px-2"
+          >
+            Account already exists?
+            <a class="text-brand-600 font-semibold hover:underline"
+              >Log in here</a
+            >
+          </p>
+        </div>
+
+        <!-- Toggle Link (outside both cards) -->
+
+        <div
+          id="auth-error"
+          class="text-red-500 text-sm text-center mt-2 hidden"
+        ></div>
+      </div>
+    </section>
+
+<!-- ==================== SHOP SECTION ==================== -->
+
+
+<section
+  id="shop-section"
+  class="hidden relative z-10 mx-4 mt-14 scroll-mt-28"
+>
+  <!-- Section Heading -->
+  <div class="text-center mb-6">
+    <span class="text-5xl inline-block animate-bounce-gentle">🛒</span>
+    <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">
+      Our Fresh Products
+    </h2>
+    <p  class="text-gray-600 mt-1 max-w-lg mx-auto">
+      Click + to add items to your cart
+    </p>
+  </div>
+
+  <!-- 🔍 Sticky Search Bar (fixed negative margin removed) -->
+  <div class="sticky top-[80px] z-40 pt-2 pb-3 bg-white/40 backdrop-blur-lg rounded-b-2xl shadow-md mb-6">
+    <div class="flex justify-center px-4">
+      <div class="relative w-full max-w-xl">
+        <!-- Search Icon -->
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400 z-10">
+          🔍
+        </span>
+
+        <!-- Input Field -->
+        <input
+          id="ShopSearchFruits"
+          type="text"
+          placeholder="Search fresh products..."
+          class="input-3d w-full pl-12 pr-28 py-3 rounded-full text-gray-700 bg-white/80 backdrop-blur-sm border border-white/50 shadow-lg focus:ring-2 focus:ring-brand-400 focus:border-brand-400 transition-all duration-300 placeholder-gray-400"
+        />
+
+        <!-- Animated Search Button -->
+        <button
+          id="ShopSearchFruitsBtn"
+          type="button"
+          class="absolute right-1.5 top-1/2 -translate-y-1/2 px-6 py-2 bg-brand-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse-glow"
+        >
+          <span class="relative z-10">Search</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Grid -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto"
+    id="products-container"
+  >
+    <!-- Dynamic cards yahan JavaScript se aayenge -->
+  </div>
+</section>
+
+    <!-- ==================== CART SECTION ==================== -->
+  <section id="cart-section" class="hidden relative z-10 mx-4 mt-14 scroll-mt-28">
+  <div class="text-center mb-8">
+    <span class="text-5xl inline-block animate-bounce-gentle">🛍️</span>
+    <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">Your Cart</h2>
+    <p class="text-gray-600 mt-1">Manage items before checkout</p>
+  </div>
+
+  <div class="max-w-3xl mx-auto">
+    <div class="glass-card p-6 md:p-8 card-3d-alt" style="border-radius: 28px;">
+      
+      <!-- Cart Items Container -->
+      <div id="cart-items-container" class="space-y-5">
+        
+        <!-- ===== Sample Cart Item ===== -->
+       
+        
+        <!-- You can add more static items here for demo, or leave it for dynamic JS -->
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="mt-6 pt-6 border-t-2 border-dashed border-gray-300" id="cart-summary">
+        <div class="flex justify-between text-gray-700 font-semibold mb-2">
+          <span>Subtotal</span><span  id="cart-subtotal">$5.98</span>
+        </div>
+        <div class="flex justify-between text-gray-700 font-semibold mb-2">
+          <span>Delivery Fee</span><span id="cartDeliveryFee" class="text-green-600">FREE 🎉</span>
+        </div>
+        <div class="flex justify-between text-xl font-extrabold text-gray-900 mt-3 pt-3 border-t border-gray-200">
+          <span>Total</span><span  class="gradient-text" id="cart-total">$5.98</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap gap-3 mt-6">
+        <a id="proceedToCheckout" class="btn-glow flex-1 text-center py-3 bg-brand-500 text-white font-bold rounded-xl text-lg shadow-xl">
+          💳 Proceed to Checkout
+        </a>
+        <a id="ContinueShopping" class="flex-1 text-center py-3 bg-white/70 text-brand-700 font-bold rounded-xl text-lg shadow-md border border-brand-300 hover:bg-brand-50 transition-all">
+          🛒 Continue Shopping
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ==================== CHECKOUT SECTION ==================== -->
+    <section
+      id="checkout-section"
+      class="hidden relative z-10 mx-4 mt-14 scroll-mt-28"
+    >
+      <div class="text-center mb-8">
+        <span class="text-5xl inline-block animate-bounce-gentle">💳</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">
+          Secure Checkout
+        </h2>
+        <p class="text-gray-600 mt-1">Complete your purchase</p>
+      </div>
+      <div class="max-w-2xl mx-auto">
+        <div
+          class="glass-card p-6 md:p-8 card-3d-alt"
+          style="border-radius: 28px"
+        >
+          <form class="space-y-5">
+            <fieldset
+              class="border-2 border-dashed border-brand-200 p-5 rounded-2xl bg-white/40"
+            >
+              <legend class="font-bold text-brand-700 px-3 text-lg">
+                📦 Shipping Address
+              </legend>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone"
+                  class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+                />
+                <input
+                  type="text"
+                  placeholder="Address"
+                  class="sm:col-span-2 input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+                />
+              </div>
+            </fieldset>
+            <fieldset
+              class="border-2 border-dashed border-amber-200 p-5 rounded-2xl bg-white/40"
+            >
+              <legend class="font-bold text-amber-700 px-3 text-lg">
+                💳 Payment Details
+              </legend>
+              <input
+                type="text"
+                placeholder="Card Number"
+                class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200 mb-3"
+              />
+              <div class="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+                />
+                <input
+                  type="text"
+                  placeholder="CVV"
+                  class="input-3d w-full px-4 py-3 rounded-xl bg-white/70 border border-gray-200"
+                />
+              </div>
+            </fieldset>
+            <a
+              id="placeOrder"
+              class="btn-glow block text-center w-full py-4 bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold rounded-xl text-xl shadow-2xl"
+              >🔒 Place Order</a
+            >
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== EMPTY CART POPUP ==================== -->
+<div id="empty-cart-popup-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm hidden">
+  <!-- Decorative gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-br from-orange-100/20 to-red-100/20"></div>
+
+  <!-- Glass Card -->
+  <div class="relative glass-card p-8 md:p-10 max-w-md w-full mx-4 text-center card-3d animate-scale-in shadow-2xl"
+       style="border-radius: 32px; animation-duration: 0.5s;">
+    
+    <!-- Floating 3D sphere (sad grocery ball) -->
+    <div class="absolute -top-8 -left-8 sphere-3d opacity-80" style="width:60px; height:60px; animation-duration:6s;"></div>
+    
+    <!-- Close (✖) button – styling same as login popup -->
+    <span id="emptyCartCutBtn"
+          class="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 text-gray-600 shadow-md z-10 cursor-pointer">
+      ✖
+    </span>
+
+    <!-- Empty Cart Icon -->
+    <div class="text-7xl mb-4 animate-bounce-gentle">🛒❌</div>
+
+    <!-- Message -->
+    <h2 class="text-2xl md:text-3xl font-extrabold gradient-text mb-2">Oops! Cart is Empty</h2>
+    <p class="text-gray-600 mb-6 font-medium">Add some fresh groceries before placing the order.</p>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a id="browseProducts" 
+      href="#shop-section"
+         class="btn-glow px-6 py-3 bg-brand-500 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all cursor-pointer">
+        🛍️ Browse Products
+      </a>
+      <span id="emptyCartCloseBtn"
+            class="px-6 py-3 bg-white/70 text-gray-700 font-bold rounded-full border border-gray-300 cursor-pointer hover:bg-gray-100 transition-all">
+        ✖ Close
+      </span>
+    </div>
+  </div>
+</div>
+
+    <!-- ==================== ORDER SUCCESS SECTION ==================== -->
+
+    <section
+      id="success-section"
+      class="hidden relative z-10 mx-4 mt-14 mb-20 scroll-mt-28 overflow-hidden"
+    >
+      <div class="max-w-lg mx-auto text-center perspective-container">
+        <div
+          class="glass-card p-8 md:p-12 card-3d relative overflow-hidden"
+          style="border-radius: 32px"
+        >
+          <!-- Confetti pieces -->
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+          <div class="confetti-piece"></div>
+
+          <div class="relative z-10">
+            <div class="checkmark-circle inline-block mb-4">
+              <div
+                class="w-24 h-24 bg-gradient-to-br from-green-400 to-brand-500 rounded-full flex items-center justify-center mx-auto shadow-2xl animate-pulse-glow"
+                style="animation-duration: 2.5s"
+              >
+                <span class="text-5xl">✅</span>
+              </div>
+            </div>
+            <h2
+              class="text-3xl md:text-4xl font-extrabold gradient-text mt-4 animate-slide-up"
+            >
+              Order Confirmed! 🎉
+            </h2>
+            <p class="text-gray-600 mt-3 text-lg animate-slide-up font-medium">
+              Thank you for your purchase!
+            </p>
+            <div
+              class="bg-white/50 rounded-2xl p-5 mt-5 animate-scale-in text-left space-y-2"
+            >
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Order Number</span
+                ><span class="font-bold text-gray-800">#FC-2026-0591</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Total Paid</span
+                ><span id="totalPaidSuccess" class="font-extrabold text-brand-600">$0.00</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-500">Estimated Delivery</span
+                ><span id="deliveryDate" class="font-bold text-gray-800">May 21, 2026 🚚</span>
+              </div>
+            </div>
+            <a
+            id="successShopAgain"
+              href="#shop-section"
+              class="inline-block mt-6 px-8 py-3 bg-brand-500 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all hover:bg-brand-600 animate-scale-in"
+              >🛒 Shop Again</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== LOGIN REQUIRED POPUP (NO JS) ========== -->
+    <div
+      id="login-alert-overlay"
+      class="fixed inset-0 z-100 flex items-center justify-center bg-black/40 backdrop-blur-sm hidden"
+    >
+      <div
+        class="absolute inset-0 bg-linear-to-br from-brand-100/20 to-amber-100/20"
+      ></div>
+
+      <div
+        class="relative glass-card p-8 md:p-10 max-w-md w-full mx-4 text-center card-3d animate-scale-in shadow-2xl"
+        style="border-radius: 32px; animation-duration: 0.5s"
+      >
+        <div
+          class="absolute -top-8 -left-8 sphere-3d opacity-80"
+          style="width: 60px; height: 60px; animation-duration: 6s"
+        ></div>
+
+        <span
+          id="CutAlertBtn"
+          class="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 text-gray-600 shadow-md z-10 cursor-pointer"
+        >
+          ✖
+        </span>
+
+        <div class="text-6xl mb-4 animate-bounce-gentle">🔒</div>
+
+        <h2 class="text-2xl md:text-3xl font-extrabold gradient-text mb-2">
+          Hold on!
+        </h2>
+        <p class="text-gray-600 mb-6 font-medium">
+          Please login or sign up to access this section.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            id="goToLoginAlertBtn"
+            href="#login-section"
+            class="btn-glow px-6 py-3 bg-brand-500 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all cursor-pointer"
+          >
+            🔐 Go to Login
+          </a>
+          <span
+            id="closeAlertBtn"
+            class="px-6 py-3 bg-white/70 text-gray-700 font-bold rounded-full border border-gray-300 cursor-pointer hover:bg-gray-100 transition-all"
+          >
+            ✖ Close
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer
+      class="relative z-10 glass-card-dark mt-3 mx-4 mb-6 p-6 text-center"
+      style="border-radius: 28px"
+    >
+      <p class="text-gray-500 text-sm">
+        © 2026 <span class="gradient-text font-bold">FreshCart</span> — Made
+        with ❤️
+      </p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
+ 
