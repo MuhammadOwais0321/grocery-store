@@ -26,4 +26,4 @@ A responsive grocery store UI built with HTML, Tailwind CSS and vanilla JavaScri
 ![signup](screenshots/signup.png)
 ![Cart](screenshots/cartpage.png)
 ![Checkout](screenshots/checkoutpage.png)
-![ShopPage](screenshots/shopsage.png)
+![ShopPage](screenshots/shoppage.png)
