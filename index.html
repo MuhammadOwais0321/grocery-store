@@ -482,6 +482,13 @@
       [data-product-id] {
         cursor: pointer;
       }
+      .view-btn {
+        transition: all 0.2s ease;
+      }
+      .view-btn:hover {
+        transform: scale(1.15);
+        background-color: rgba(59, 130, 246, 0.1); /* light blue */
+      }
     </style>
   </head>
   <body class="min-h-screen relative">
@@ -719,107 +726,128 @@
       </div>
     </section>
 
-<!-- ==================== SHOP SECTION ==================== -->
+    <!-- ==================== SHOP SECTION ==================== -->
 
-
-<section
-  id="shop-section"
-  class="hidden relative z-10 mx-4 mt-14 scroll-mt-28"
->
-  <!-- Section Heading -->
-  <div class="text-center mb-6">
-    <span class="text-5xl inline-block animate-bounce-gentle">🛒</span>
-    <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">
-      Our Fresh Products
-    </h2>
-    <p  class="text-gray-600 mt-1 max-w-lg mx-auto">
-      Click + to add items to your cart
-    </p>
-  </div>
-
-  <!-- 🔍 Sticky Search Bar (fixed negative margin removed) -->
-  <div class="sticky top-[80px] z-40 pt-2 pb-3 bg-white/40 backdrop-blur-lg rounded-b-2xl shadow-md mb-6">
-    <div class="flex justify-center px-4">
-      <div class="relative w-full max-w-xl">
-        <!-- Search Icon -->
-        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400 z-10">
-          🔍
-        </span>
-
-        <!-- Input Field -->
-        <input
-          id="ShopSearchFruits"
-          type="text"
-          placeholder="Search fresh products..."
-          class="input-3d w-full pl-12 pr-28 py-3 rounded-full text-gray-700 bg-white/80 backdrop-blur-sm border border-white/50 shadow-lg focus:ring-2 focus:ring-brand-400 focus:border-brand-400 transition-all duration-300 placeholder-gray-400"
-        />
-
-        <!-- Animated Search Button -->
-        <button
-          id="ShopSearchFruitsBtn"
-          type="button"
-          class="absolute right-1.5 top-1/2 -translate-y-1/2 px-6 py-2 bg-brand-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse-glow"
-        >
-          <span class="relative z-10">Search</span>
-        </button>
+    <section
+      id="shop-section"
+      class="hidden relative z-10 mx-4 mt-14 scroll-mt-28"
+    >
+      <!-- Section Heading -->
+      <div class="text-center mb-6">
+        <span class="text-5xl inline-block animate-bounce-gentle">🛒</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">
+          Our Fresh Products
+        </h2>
+        <p class="text-gray-600 mt-1 max-w-lg mx-auto">
+          Click + to add items to your cart
+        </p>
       </div>
-    </div>
-  </div>
 
-  <!-- Product Grid -->
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto"
-    id="products-container"
-  >
-    <!-- Dynamic cards yahan JavaScript se aayenge -->
-  </div>
-</section>
+      <!-- 🔍 Sticky Search Bar (fixed negative margin removed) -->
+      <div
+        class="sticky top-20 z-40 pt-2 pb-3 bg-white/40 backdrop-blur-lg rounded-b-2xl shadow-md mb-6"
+      >
+        <div class="flex justify-center px-4">
+          <div class="relative w-full max-w-xl">
+            <!-- Search Icon -->
+            <span
+              class="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400 z-10"
+            >
+              🔍
+            </span>
+
+            <!-- Input Field -->
+            <input
+              id="ShopSearchFruits"
+              type="text"
+              placeholder="Search fresh products..."
+              class="input-3d w-full pl-12 pr-28 py-3 rounded-full text-gray-700 bg-white/80 backdrop-blur-sm border border-white/50 shadow-lg focus:ring-2 focus:ring-brand-400 focus:border-brand-400 transition-all duration-300 placeholder-gray-400"
+            />
+
+            <!-- Animated Search Button -->
+            <button
+              id="ShopSearchFruitsBtn"
+              type="button"
+              class="absolute right-1.5 top-1/2 -translate-y-1/2 px-6 py-2 bg-brand-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse-glow"
+            >
+              <span class="relative z-10">Search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-6xl mx-auto"
+        id="products-container"
+      >
+        <!-- Dynamic cards yahan JavaScript se aayenge -->
+      </div>
+    </section>
 
     <!-- ==================== CART SECTION ==================== -->
-  <section id="cart-section" class="hidden relative z-10 mx-4 mt-14 scroll-mt-28">
-  <div class="text-center mb-8">
-    <span class="text-5xl inline-block animate-bounce-gentle">🛍️</span>
-    <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">Your Cart</h2>
-    <p class="text-gray-600 mt-1">Manage items before checkout</p>
-  </div>
-
-  <div class="max-w-3xl mx-auto">
-    <div class="glass-card p-6 md:p-8 card-3d-alt" style="border-radius: 28px;">
-      
-      <!-- Cart Items Container -->
-      <div id="cart-items-container" class="space-y-5">
-        
-        <!-- ===== Sample Cart Item ===== -->
-       
-        
-        <!-- You can add more static items here for demo, or leave it for dynamic JS -->
+    <section
+      id="cart-section"
+      class="hidden relative z-10 mx-4 mt-14 scroll-mt-28"
+    >
+      <div class="text-center mb-8">
+        <span class="text-5xl inline-block animate-bounce-gentle">🛍️</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mt-2">
+          Your Cart
+        </h2>
+        <p class="text-gray-600 mt-1">Manage items before checkout</p>
       </div>
 
-      <!-- Cart Summary -->
-      <div class="mt-6 pt-6 border-t-2 border-dashed border-gray-300" id="cart-summary">
-        <div class="flex justify-between text-gray-700 font-semibold mb-2">
-          <span>Subtotal</span><span  id="cart-subtotal">$5.98</span>
-        </div>
-        <div class="flex justify-between text-gray-700 font-semibold mb-2">
-          <span>Delivery Fee</span><span id="cartDeliveryFee" class="text-green-600">FREE 🎉</span>
-        </div>
-        <div class="flex justify-between text-xl font-extrabold text-gray-900 mt-3 pt-3 border-t border-gray-200">
-          <span>Total</span><span  class="gradient-text" id="cart-total">$5.98</span>
-        </div>
-      </div>
+      <div class="max-w-3xl mx-auto">
+        <div
+          class="glass-card p-6 md:p-8 card-3d-alt"
+          style="border-radius: 28px"
+        >
+          <!-- Cart Items Container -->
+          <div id="cart-items-container" class="space-y-5">
+            <!-- ===== Sample Cart Item ===== -->
 
-      <!-- Action Buttons -->
-      <div class="flex flex-wrap gap-3 mt-6">
-        <a id="proceedToCheckout" class="btn-glow flex-1 text-center py-3 bg-brand-500 text-white font-bold rounded-xl text-lg shadow-xl">
-          💳 Proceed to Checkout
-        </a>
-        <a id="ContinueShopping" class="flex-1 text-center py-3 bg-white/70 text-brand-700 font-bold rounded-xl text-lg shadow-md border border-brand-300 hover:bg-brand-50 transition-all">
-          🛒 Continue Shopping
-        </a>
+            <!-- You can add more static items here for demo, or leave it for dynamic JS -->
+          </div>
+
+          <!-- Cart Summary -->
+          <div
+            class="mt-6 pt-6 border-t-2 border-dashed border-gray-300"
+            id="cart-summary"
+          >
+            <div class="flex justify-between text-gray-700 font-semibold mb-2">
+              <span>Subtotal</span><span id="cart-subtotal">$5.98</span>
+            </div>
+            <div class="flex justify-between text-gray-700 font-semibold mb-2">
+              <span>Delivery Fee</span
+              ><span id="cartDeliveryFee" class="text-green-600">FREE 🎉</span>
+            </div>
+            <div
+              class="flex justify-between text-xl font-extrabold text-gray-900 mt-3 pt-3 border-t border-gray-200"
+            >
+              <span>Total</span
+              ><span class="gradient-text" id="cart-total">$5.98</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-3 mt-6">
+            <a
+              id="proceedToCheckout"
+              class="btn-glow flex-1 text-center py-3 bg-brand-500 text-white font-bold rounded-xl text-lg shadow-xl"
+            >
+              💳 Proceed to Checkout
+            </a>
+            <a
+              id="ContinueShopping"
+              class="flex-1 text-center py-3 bg-white/70 text-brand-700 font-bold rounded-xl text-lg shadow-md border border-brand-300 hover:bg-brand-50 transition-all"
+            >
+              🛒 Continue Shopping
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- ==================== CHECKOUT SECTION ==================== -->
     <section
@@ -897,44 +925,63 @@
       </div>
     </section>
     <!-- ==================== EMPTY CART POPUP ==================== -->
-<div id="empty-cart-popup-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm hidden">
-  <!-- Decorative gradient overlay -->
-  <div class="absolute inset-0 bg-gradient-to-br from-orange-100/20 to-red-100/20"></div>
+    <div
+      id="empty-cart-popup-overlay"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm hidden"
+    >
+      <!-- Decorative gradient overlay -->
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-orange-100/20 to-red-100/20"
+      ></div>
 
-  <!-- Glass Card -->
-  <div class="relative glass-card p-8 md:p-10 max-w-md w-full mx-4 text-center card-3d animate-scale-in shadow-2xl"
-       style="border-radius: 32px; animation-duration: 0.5s;">
-    
-    <!-- Floating 3D sphere (sad grocery ball) -->
-    <div class="absolute -top-8 -left-8 sphere-3d opacity-80" style="width:60px; height:60px; animation-duration:6s;"></div>
-    
-    <!-- Close (✖) button – styling same as login popup -->
-    <span id="emptyCartCutBtn"
-          class="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 text-gray-600 shadow-md z-10 cursor-pointer">
-      ✖
-    </span>
+      <!-- Glass Card -->
+      <div
+        class="relative glass-card p-8 md:p-10 max-w-md w-full mx-4 text-center card-3d animate-scale-in shadow-2xl"
+        style="border-radius: 32px; animation-duration: 0.5s"
+      >
+        <!-- Floating 3D sphere (sad grocery ball) -->
+        <div
+          class="absolute -top-8 -left-8 sphere-3d opacity-80"
+          style="width: 60px; height: 60px; animation-duration: 6s"
+        ></div>
 
-    <!-- Empty Cart Icon -->
-    <div class="text-7xl mb-4 animate-bounce-gentle">🛒❌</div>
+        <!-- Close (✖) button – styling same as login popup -->
+        <span
+          id="emptyCartCutBtn"
+          class="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 text-gray-600 shadow-md z-10 cursor-pointer"
+        >
+          ✖
+        </span>
 
-    <!-- Message -->
-    <h2 class="text-2xl md:text-3xl font-extrabold gradient-text mb-2">Oops! Cart is Empty</h2>
-    <p class="text-gray-600 mb-6 font-medium">Add some fresh groceries before placing the order.</p>
+        <!-- Empty Cart Icon -->
+        <div class="text-7xl mb-4 animate-bounce-gentle">🛒❌</div>
 
-    <!-- Action Buttons -->
-    <div class="flex flex-col sm:flex-row gap-3 justify-center">
-      <a id="browseProducts" 
-      href="#shop-section"
-         class="btn-glow px-6 py-3 bg-brand-500 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all cursor-pointer">
-        🛍️ Browse Products
-      </a>
-      <span id="emptyCartCloseBtn"
-            class="px-6 py-3 bg-white/70 text-gray-700 font-bold rounded-full border border-gray-300 cursor-pointer hover:bg-gray-100 transition-all">
-        ✖ Close
-      </span>
+        <!-- Message -->
+        <h2 class="text-2xl md:text-3xl font-extrabold gradient-text mb-2">
+          Oops! Cart is Empty
+        </h2>
+        <p class="text-gray-600 mb-6 font-medium">
+          Add some fresh groceries before placing the order.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            id="browseProducts"
+            href="#shop-section"
+            class="btn-glow px-6 py-3 bg-brand-500 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all cursor-pointer"
+          >
+            🛍️ Browse Products
+          </a>
+          <span
+            id="emptyCartCloseBtn"
+            class="px-6 py-3 bg-white/70 text-gray-700 font-bold rounded-full border border-gray-300 cursor-pointer hover:bg-gray-100 transition-all"
+          >
+            ✖ Close
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <!-- ==================== ORDER SUCCESS SECTION ==================== -->
 
@@ -987,15 +1034,21 @@
               </div>
               <div class="flex justify-between text-sm">
                 <span class="text-gray-500">Total Paid</span
-                ><span id="totalPaidSuccess" class="font-extrabold text-brand-600">$0.00</span>
+                ><span
+                  id="totalPaidSuccess"
+                  class="font-extrabold text-brand-600"
+                  >$0.00</span
+                >
               </div>
               <div class="flex justify-between text-sm">
                 <span class="text-gray-500">Estimated Delivery</span
-                ><span id="deliveryDate" class="font-bold text-gray-800">May 21, 2026 🚚</span>
+                ><span id="deliveryDate" class="font-bold text-gray-800"
+                  >May 21, 2026 🚚</span
+                >
               </div>
             </div>
             <a
-            id="successShopAgain"
+              id="successShopAgain"
               href="#shop-section"
               class="inline-block mt-6 px-8 py-3 bg-brand-500 text-white font-bold rounded-full shadow-xl hover:shadow-2xl transition-all hover:bg-brand-600 animate-scale-in"
               >🛒 Shop Again</a
@@ -1057,6 +1110,12 @@
       </div>
     </div>
 
+    <!-- ==================== PRODUCT DETAIL CARD (reusable) ==================== -->
+<div id="ProductDetails" class="hidden glass-card p-6 md:p-8 max-w-2xl mx-auto relative card-3d-alt hover-lift"
+     style="border-radius: 32px;">
+  
+ </div>
+
     <!-- ==================== FOOTER ==================== -->
     <footer
       class="relative z-10 glass-card-dark mt-3 mx-4 mb-6 p-6 text-center"
@@ -1070,4 +1129,3 @@
     <script src="script.js"></script>
   </body>
 </html>
- 
